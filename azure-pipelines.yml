@@ -14,8 +14,11 @@ variables:
 stages:
 - stage: build
   displayName: build
-  pool: 
-    vmImage: 'ubuntu-latest'
+  jobs:
+  - job: Provision
+    displayName: Provisioning container instance
+    pool: 
+      vmImage: 'ubuntu-latest'
 - task: Docker@2
   inputs:
     containerRegistry: 'azure CR'
