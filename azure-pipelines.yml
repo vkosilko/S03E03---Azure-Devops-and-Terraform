@@ -26,3 +26,5 @@ stages:
           repository: 'weatherapi'
           command: 'buildAndPush'
           Dockerfile: '**/Dockerfile'
+          tags: |
+            $(tag)
