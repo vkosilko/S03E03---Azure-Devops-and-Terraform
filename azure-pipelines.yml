@@ -42,7 +42,7 @@ stages:
             set -e
 
             terraform init -input=false -lock=false
-            terraform apply -input=false -auto-approve -lock=false
+            terraform apply -input=false -auto-approve
         name: 'runTerraform'
         displayName: 'run terraform'
         env:
