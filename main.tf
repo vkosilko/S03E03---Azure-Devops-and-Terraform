@@ -5,7 +5,7 @@ provider "azurerm" {
 
 terraform {
   backend "azurerm" {
-    resource_group_name   = "test_tf"
+    resource_group_name   = "vkosilko"
     storage_account_name  = "testtfstorageacc"
     container_name        = "tfstate"
     key                   = "terraform.tfstate"
