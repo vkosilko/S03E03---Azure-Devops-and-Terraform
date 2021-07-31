@@ -19,12 +19,13 @@ stages:
     displayName: Provisioning container instance
     pool: 
       vmImage: 'ubuntu-latest'
-- task: Docker@2
-  inputs:
-    containerRegistry: 'azure CR'
-    repository: 'weatherapi'
-    command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
+    steps:
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'azure CR'
+        repository: 'weatherapi'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
 
 - stage: Provision
   displayName: Terraform azure
