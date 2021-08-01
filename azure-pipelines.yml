@@ -23,7 +23,7 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'docker registry'
-        repository: 'terraformcr'
+        repository: 'vladimirak/terraformcr'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
 
