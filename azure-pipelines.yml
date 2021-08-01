@@ -72,7 +72,7 @@ stages:
 
 - stage: Destroy
   displayName: Terraform azure
-  dependsOn: Validate
+  dependsOn: waitForValidation
   jobs:
   - job: Destroy
     displayName: Destroy infra
