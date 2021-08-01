@@ -22,8 +22,8 @@ stages:
     steps:
     - task: Docker@2
       inputs:
-        containerRegistry: 'azure CR'
-        repository: 'weatherapi'
+        containerRegistry: 'docker registry'
+        repository: 'terraformcr'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
 
