@@ -54,10 +54,10 @@ stages:
 
 - stage: Provision
   displayName: Terraform azure
-  dependsOn: Build
+  dependsOn: Provision
   jobs:
-  - job: Provision
-    displayName: Provisioning container instance
+  - job: Destroy
+    displayName: Destroy infra
     pool: 
       vmImage: 'ubuntu-latest'
     variables:
@@ -66,13 +66,11 @@ stages:
       - script: |
             set -e
 
-            terraform init -input=false
-            terraform apply -input=false -auto-approve
-        name: 'runTerraform'
-        displayName: 'run terraform'
+            terraform destroy -input=false
+        name: 'destroy infra'
+        displayName: 'destroy infra'
         env:
           ARM_CLIENT_ID: $(ARM_CLIENT_ID)
           ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
           ARM_TENANT_ID: $(ARM_TENANT_ID)
           ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
-          TF_VAR_imagebuild: $(tag)
