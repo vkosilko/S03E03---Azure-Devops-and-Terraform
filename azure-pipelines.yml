@@ -80,8 +80,8 @@ stages:
     steps:
       - script: |
             set -e
-
-            terraform destroy -input=false
+            terraform init -input=false
+            terraform destroy -input=false -auto-approve
         name: 'Destroy'
         displayName: 'destroy infra'
         env:
