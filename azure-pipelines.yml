@@ -52,11 +52,20 @@ stages:
           ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
           TF_VAR_imagebuild: $(tag)
 
+- stage: Validate
+  displayName: Terraform azure
+  dependsOn: Provision
+  jobs:
+  - job: Validate
+    steps:
+    - task: ManualValidation@0
+      inputs:
+        notifyUsers: 'test'
 
 
 - stage: Destroy
   displayName: Terraform azure
-  dependsOn: Provision
+  dependsOn: Validate
   jobs:
   - job: Destroy
     displayName: Destroy infra
@@ -65,9 +74,6 @@ stages:
     variables:
     - group: 'tf service principle'
     steps:
-      - task: ManualValidation@0
-        inputs:
-          notifyUsers: 'test'
       - script: |
             set -e
 
