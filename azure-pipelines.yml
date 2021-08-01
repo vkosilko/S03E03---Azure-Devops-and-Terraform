@@ -12,22 +12,20 @@ variables:
   tag: '$(Build.BuildId)'
 
 stages:
-- stage: Build
-  displayName: Build image
+- stage: build
+  displayName: build
   jobs:
-  - job: Build
-    displayName: Build
+  - job: Provision
+    displayName: Provisioning container instance
     pool: 
       vmImage: 'ubuntu-latest'
     steps:
-      - task: Docker@2
-        inputs:
-          containerRegistry: 'azure registry'
-          repository: 'weatherapi'
-          command: 'buildAndPush'
-          Dockerfile: '**/Dockerfile'
-          tags: |
-            $(tag)
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'azure CR'
+        repository: 'weatherapi'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
 
 - stage: Provision
   displayName: Terraform azure
@@ -43,7 +41,7 @@ stages:
       - script: |
             set -e
 
-            terraform init -input=false
+            terraform init -input=false -lock=false
             terraform apply -input=false -auto-approve
         name: 'runTerraform'
         displayName: 'run terraform'
