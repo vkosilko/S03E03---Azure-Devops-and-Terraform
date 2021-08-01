@@ -14,6 +14,7 @@ terraform {
 
 variable "imagebuild" {
   type        = string
+  default = "28"
   description = "build version"
 }
 
@@ -36,7 +37,7 @@ resource "azurerm_container_group" "test_tfcg" {
 
   container {
     name             = "weatherapi"
-    image            = "terraformcr.azurecr.io/weatherapi:${var.imagebuild}"
+    image            = "vladimirak/terraformcr:${var.imagebuild}"
       cpu               = "1"
       memory            = "1"
 
