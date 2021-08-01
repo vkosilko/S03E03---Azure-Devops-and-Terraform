@@ -67,7 +67,7 @@ stages:
             set -e
 
             terraform destroy -input=false
-        name: 'destroy infra'
+        name: 'Destroy'
         displayName: 'destroy infra'
         env:
           ARM_CLIENT_ID: $(ARM_CLIENT_ID)
