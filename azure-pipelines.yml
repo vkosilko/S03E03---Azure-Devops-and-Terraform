@@ -52,16 +52,23 @@ stages:
           ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
           TF_VAR_imagebuild: $(tag)
 
-- stage: Validate
-  displayName: Terraform azure
+- stage: waitForValidation
+  displayName: waitForValidation
   dependsOn: Provision
   jobs:
-  - job: Validate
+  - job: waitForValidation
+    displayName: Wait for external validation
+    pool: 
+      vmImage: 'ubuntu-latest'
+    timeoutInMinutes: 4320 # job times out in 3 days
     steps:
     - task: ManualValidation@0
+      timeoutInMinutes: 1440 # task times out in 1 day
       inputs:
-        notifyUsers: 'test'
-
+        notifyUsers: |
+          vladimir.kosilko@gmail.com
+        instructions: 'Please validate the build configuration and resume'
+        onTimeout: 'reject'
 
 - stage: Destroy
   displayName: Terraform azure
