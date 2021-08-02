@@ -14,7 +14,7 @@ terraform {
 
 variable "imagebuild" {
   type        = string
-  default = "28"
+  default = "33"
   description = "build version"
 }
 
