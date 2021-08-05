@@ -16,7 +16,6 @@ stages:
 
 - stage: Provision
   displayName: Terraform azure
-  dependsOn: Build
   jobs:
   - job: Provision
     displayName: Provisioning container instance
